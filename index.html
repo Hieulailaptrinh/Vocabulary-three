@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Vocabulary Learning</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <div class="mini-header">
+          <div class="logo">TrungHieuVoca</div>
+          <img src="./img/Screenshot_6.png" alt="" class="Logo" />
+        </div>
+        <nav>
+          <ul>
+            <li class="active" data-target="home">
+              <i class="fa-regular fa-house"></i>
+            </li>
+            <li data-target="vocabulary">Vocabulary</li>
+            <li data-target="practice">Practice</li>
+            <li data-target="writing">Context</li>
+            <li data-target="progress">Progress</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="home" class="section active-section">
+        <div class="hero">
+          <h1>Từng bước chinh phục từ vựng Tiếng Anh</h1>
+          <p>Học từ vựng mỗi ngày với phương pháp Flashcard & Context.</p>
+          <button class="btn btn-primary" onclick="navigateTo('vocabulary')">
+            Bắt đầu ngay
+          </button>
+        </div>
+      </section>
+
+      <section id="vocabulary" class="section">
+        <div class="flashcard-container">
+          <div class="card-wrapper">
+            <div class="card" id="flashcard">
+              <div class="card-face card-front">
+                <span class="hint-text">Click để lật</span>
+                <h2 id="vocab-word">Word</h2>
+                <p id="vocab-ipa" class="ipa">/ipa/</p>
+                <button id="btn-speak" class="btn-icon">🔊</button>
+              </div>
+              <div class="card-face card-back">
+                <h3 id="vocab-meaning">Nghĩa</h3>
+                <div class="example-box">
+                  <p>Example:</p>
+                  <p id="vocab-example">"..."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls-group">
+            <div class="controls">
+              <button id="btn-prev" class="btn btn-outline">← Trước</button>
+              <span id="card-counter">1/80</span>
+              <button id="btn-next" class="btn btn-primary">Sau →</button>
+            </div>
+
+            <div class="extra-controls">
+              <div class="jump-box">
+                <input
+                  type="number"
+                  id="jump-input"
+                  placeholder="Số..."
+                  min="1"
+                />
+                <button id="btn-jump" class="btn btn-small">Đến</button>
+              </div>
+              <button
+                id="btn-shuffle"
+                class="btn btn-shuffle"
+                title="Trộn ngẫu nhiên từ vựng"
+              >
+                🔀 Trộn bài
+              </button>
+            </div>
+          </div>
+
+          <div class="mark-learned">
+            <button id="btn-mark-learned" class="btn btn-success">
+              ✅ Đã thuộc từ này
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="practice" class="section">
+        <div class="quiz-container">
+          <div id="quiz-mode-label" class="mode-label" style="display: none">
+            🔥 Chế độ ôn tập câu sai
+          </div>
+
+          <h2>Luyện tập nhanh (Nghĩa)</h2>
+
+          <div class="question-box">
+            <p>Nghĩa của từ <strong id="quiz-word">...</strong> là gì?</p>
+          </div>
+          <div id="quiz-options" class="options-grid"></div>
+          <p id="quiz-feedback" class="feedback"></p>
+
+          <div class="quiz-controls">
+            <button
+              id="btn-next-quiz"
+              class="btn btn-secondary"
+              style="display: none"
+            >
+              Câu tiếp theo
+            </button>
+          </div>
+
+          <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee" />
+
+          <div class="mistake-area">
+            <p>
+              Số câu làm sai:
+              <strong id="wrong-count" style="color: var(--error)">0</strong>
+            </p>
+            <button id="btn-review-mistakes" class="btn btn-warning" disabled>
+              🔁 Làm lại câu sai
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="writing" class="section">
+        <div class="quiz-container">
+          <h2>Điền từ vào chỗ trống</h2>
+
+          <div class="context-navigation-bar">
+            <button id="btn-context-prev" class="nav-arrow">❮</button>
+            <span id="context-counter" class="counter-text">1/80</span>
+            <button id="btn-context-next" class="nav-arrow">❯</button>
+          </div>
+          <p style="color: #7f8c8d; margin-bottom: 15px; margin-top: 10px">
+            Chọn từ vựng đúng để hoàn thành câu sau:
+          </p>
+
+          <div class="sentence-box">
+            <p id="context-sentence"></p>
+          </div>
+
+          <div id="context-options" class="options-grid"></div>
+
+          <p id="context-feedback" class="feedback"></p>
+
+          <button
+            id="btn-next-context-auto"
+            class="btn btn-secondary"
+            style="display: none; margin-top: 15px"
+          >
+            Câu tiếp theo ➜
+          </button>
+
+          <button
+            id="btn-restart-context"
+            class="btn btn-primary"
+            style="display: none; margin-top: 15px"
+          >
+            Làm lại từ đầu
+          </button>
+        </div>
+      </section>
+
+      <section id="progress" class="section">
+        <div class="progress-container">
+          <h2>Tiến độ học tập của bạn</h2>
+
+          <div class="stats-card">
+            <div class="circular-progress">
+              <div class="value-container" id="progress-percent">0%</div>
+            </div>
+            <p>
+              Số từ đã thuộc: <strong id="learned-count">0</strong> /
+              <span id="total-count">0</span>
+            </p>
+          </div>
+
+          <button
+            id="btn-view-learned"
+            class="btn btn-info"
+            style="margin-top: 15px; margin-bottom: 10px"
+          >
+            📖 Xem danh sách từ đã thuộc
+          </button>
+
+          <div
+            id="learned-list-container"
+            class="learned-list-box"
+            style="display: none"
+          >
+            <h3>Danh sách từ vựng</h3>
+            <ul id="learned-list-content"></ul>
+            <button
+              id="btn-close-list"
+              class="btn btn-small"
+              style="margin-top: 10px; background-color: #7f8c8d"
+            >
+              Đóng lại
+            </button>
+          </div>
+
+          <hr
+            style="width: 50%; margin: 20px auto; border-top: 1px solid #eee"
+          />
+
+          <button id="btn-reset" class="btn btn-danger">Reset Tiến độ</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        © 2024 English Vocabulary Learning. "Học tập là không ngừng bỏ cuộc".
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
